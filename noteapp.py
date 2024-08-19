@@ -62,7 +62,6 @@ def edit_note(note_id):
     note = db.session.execute(
         db.select(models.Note).where(models.Note.id == note_id)
     ).scalars().first()
-
     if not note:
         return flask.redirect(flask.url_for("index"))
 
@@ -70,7 +69,8 @@ def edit_note(note_id):
 
     if form.validate_on_submit():
         note.title = form.title.data
-
+        note.description = form.description.data
+        
         note.tags.clear() 
         if isinstance(form.tags.data, str):
             tag_names = [tag_name.strip() for tag_name in form.tags.data.split(',') if tag_name.strip()]
