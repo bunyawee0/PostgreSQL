@@ -70,14 +70,11 @@ def edit_note(note_id):
 
     if form.validate_on_submit():
         note.title = form.title.data
-        # note.content = form.content.data
 
-        # จัดการกับแท็ก
-        note.tags.clear()  # ลบแท็กที่มีอยู่
+        note.tags.clear() 
         if isinstance(form.tags.data, str):
             tag_names = [tag_name.strip() for tag_name in form.tags.data.split(',') if tag_name.strip()]
         else:
-            # ถ้า form.tags.data เป็น list แทนที่นี่
             tag_names = [tag_name.strip() for tag_name in form.tags.data if tag_name.strip()]
 
         for tag_name in tag_names:
@@ -89,9 +86,9 @@ def edit_note(note_id):
                 tag = models.Tag(name=tag_name)
                 db.session.add(tag)
 
-            note.tags.append(tag)  # เพิ่ม Tag objects
+            note.tags.append(tag)
 
-        db.session.commit()  # บันทึกการเปลี่ยนแปลง
+        db.session.commit() 
         return flask.redirect(flask.url_for("index"))
 
     return flask.render_template("notes-edit.html", form=form, note=note)

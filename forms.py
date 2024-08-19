@@ -43,8 +43,3 @@ class NoteForm(BaseNoteForm):
     tags = TagListField("Tag")
 
 
-# class NoteForm(FlaskForm):
-#     title = StringField('Title')
-#     content = StringField('Content')  # Use TextAreaField if necessary
-#     tags = StringField('Tags')
-
